@@ -1,4 +1,5 @@
-import React, { ReactElement, useState, useEffect } from 'react';
+import React, { ReactElement } from 'react';
+import { Typography } from '@material-ui/core';
 
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
@@ -31,8 +32,8 @@ const ScrollBlink: React.FC<Props> = ({}): ReactElement => {
       animate={{ y: ['-2px', '2px']}}
     >
       <Container>
-        <p>scroll down</p>
-        <p>{'>>'}</p>
+        <Typography variant="body2">scroll down</Typography>
+        <Typography variant="body2">{'>>'}</Typography>
       </Container>
     </motion.div>
   );

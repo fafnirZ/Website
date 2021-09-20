@@ -7,10 +7,21 @@ body {
   --background-color: #25262A;
   --background-light: #494A4E;
   --card-default: #2F3034;
+  --card-light: #404247;
   --primary: #60C697;
   --secondary: #ffffff;
 }
 
 .App {
   background: var(--background-color);
+  height: 100%;
+}
+
+#root {
+  height: 100%;
+}
+
+
+html {
+  height: 100%;
 }

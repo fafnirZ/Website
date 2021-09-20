@@ -9,7 +9,8 @@ import HackerWords from './animations/HackerWords';
 import Hamburger from './Hamburger';
 import Dropdown from './Dropdown';
 interface Props {
-
+  open: boolean
+  handleDropDown: () => void
 }
 
 const NavContainer = styled.div`
@@ -24,9 +25,15 @@ const NavContainer = styled.div`
   background: var(--background-color);
   z-index: 999;
 
-  .image_container img {
+  .image_container {
+    display: flex;
+    height: 80%;
+    max-height: 60px;
+  }
+
+  .image_container > img {
     object-fit: cover;
-    height: 100%;
+    width: 80%;
     border-radius: 50%;
   }
 
@@ -37,22 +44,16 @@ const NavContainer = styled.div`
 `;
 
 
-const Navbar: React.FC<Props> = ({}): ReactElement => {
-  
-  const [open, setOpen] = useState(false);
-
-  const handleDropDown = () => {
-    setOpen(prevState => !prevState);
-  }
+const Navbar: React.FC<Props> = ({ open, handleDropDown }): ReactElement => {
 
   return (
     <>
     <NavContainer>
-      <Box className="image_container">
-        <Link href="/">
+      <Link href="/">
+        <Box className="image_container">
           <img src={Avatar} alt="" />
-        </Link>
-      </Box>
+        </Box>
+      </Link>
       <Box className="text_container">
         <Typography variant="h5" color="secondary" >
           <HackerWords Word="Hi, I'm Jacky"/>
@@ -60,13 +61,10 @@ const Navbar: React.FC<Props> = ({}): ReactElement => {
       </Box>
       <Hidden lgUp>
         <Box marginLeft="auto" onClick={handleDropDown}>
-          <Hamburger/>
+          <Hamburger open={open} />
         </Box>
       </Hidden>
     </NavContainer>
-    <AnimatePresence exitBeforeEnter initial={false}>
-      {open && (<Hidden lgUp><Dropdown /></Hidden>)}
-    </AnimatePresence>
     </>
   );
 };

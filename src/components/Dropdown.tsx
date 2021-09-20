@@ -12,15 +12,24 @@ interface Props {
 
 const Container = styled.div`
   width: 100px;
+  height: 100%;
+
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   text-align: center;
   margin-left: auto;
 
+
   position: absolute;
-  /*top: 10vh;  required */
-  right: 0;
+  right: 10px;
+  
+
+  & > div {
+    position: sticky;
+    top: 10vh;
+    z-index: 999;
+  }
 
 `
 
@@ -30,42 +39,41 @@ interface StyledProps {
 
 
 const SectionContainer = styled.div<StyledProps>`
-  background: var(--card-default);
+  background: var(--card-light);
   width: 100px;
   height: 30px;
   margin: 2px 0;
-  position: sticky;
-  top: ${props=> props.index * 10 + 'px'};
 `;
 
 const Dropdown: React.FC<Props> = ({}): ReactElement => {
-  const cardColor = getComputedStyle(document.documentElement).getPropertyValue('--card-default')
   return (
     <Container>
-      {Links.map((item, index) => {
-        return (
-          <motion.div
-            initial={{ y: -1*index*30 }}
-            animate={{ y: 0 }}
-            transition={{ duration: 0.3, type: 'spring' }}
-            exit={{ y: -1*index*30, opacity: 0 }}
-            whileHover={{ scale: 1.2 }}
-          >
-            <SectionContainer index={index}>
-              <NavLink
-                to={item.link}
-                style={{
-                  textDecoration: 'none'
-                }}
-              >
-                <Typography variant="subtitle1" color="secondary">
-                  {item.display}
-                </Typography>
-              </NavLink>
-            </SectionContainer>
-          </motion.div>
-        )
-      })}
+      <Box>
+        {Links.map((item, index) => {
+          return (
+            <motion.div
+              initial={{ y: -1*index*30 }}
+              animate={{ y: 0 }}
+              transition={{ duration: 0.3, type: 'spring' }}
+              exit={{ y: -1*index*30, opacity: 0 }}
+              whileHover={{ scale: 1.2 }}
+            >
+              <SectionContainer index={index}>
+                <NavLink
+                  to={item.link}
+                  style={{
+                    textDecoration: 'none'
+                  }}
+                >
+                  <Typography variant="subtitle1" color="secondary">
+                    {item.display}
+                  </Typography>
+                </NavLink>
+              </SectionContainer>
+            </motion.div>
+          )
+        })}
+      </Box>
     </Container>
   );
 };

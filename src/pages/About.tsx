@@ -37,8 +37,7 @@ const Cards = [
 
 const CardContainer = styled(Card)`
   height: 100px;
-  /* width: min(70%, 300px); */
-  width: 300px;
+  width: min(50vw, 300px);
   border-radius: 3px;
   padding: 5px;
 `;

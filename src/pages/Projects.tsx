@@ -10,13 +10,17 @@ interface Props {
 
 }
 
-const ButtonContainer = styled.button`
-  width: 150px;
-  height: 50px;
+interface ButtonStyledProps {
+  smDown: boolean
+}
+
+const ButtonContainer = styled.button<ButtonStyledProps>`
+  width: min(25vw, 200px);
+  height: clamp(40px, 10%, 50px);
   background: var(--background-light);
   border: none;
   border-radius: 3px;
-  margin: 10px;
+  margin: 2px;
 
   /* transitions */
   transition: all .2s ease in;
@@ -32,7 +36,7 @@ const ButtonContainer = styled.button`
 
 
 const CardContainer = styled(Card)`
-  width: 300px;
+  width: min(70vw, 300px);
   height: 250px;
 `;
 
@@ -67,7 +71,7 @@ const Projects: React.FC<Props> = ({}): ReactElement => {
       marginBottom="50px"
       marginLeft={ mdDown ? "50px" : "150px" }
     >
-      <Box margin="50px 0" display="flex">
+      <Box margin="50px 0" display="flex" flexDirection={smDown?"column":"row"}>
         {buttons.map((button, index) => {
           return (
             <motion.div
@@ -79,7 +83,7 @@ const Projects: React.FC<Props> = ({}): ReactElement => {
                 type: 'spring'
               }}
             >
-              <ButtonContainer>
+              <ButtonContainer smDown={smDown}>
                 <Typography color="secondary">{button.name}</Typography>
               </ButtonContainer>
             </motion.div>

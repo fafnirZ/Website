@@ -4,6 +4,7 @@ import { Router, Switch, Route } from 'react-router-dom';
 import { createBrowserHistory as createHistory } from 'history';
 import { Box, ThemeProvider, createTheme, Hidden, responsiveFontSizes } from '@material-ui/core';
 import { AnimatePresence } from 'framer-motion';
+import styled from 'styled-components';
 
 //global stylesheet
 import './css/style.css';
@@ -16,6 +17,7 @@ import Projects from './pages/Projects';
 // component imports
 import Sidebar from './components/Sidebar';
 import Navbar from './components/Navbar';
+import Dropdown from './components/Dropdown';
 
 
 // theme declaration
@@ -45,6 +47,13 @@ theme.typography.body1 = {
   }
 }
 
+const BodyContainer = styled.div`
+  min-height: 90vh;
+  height: 100%;
+  /* overflow-x: hidden; */
+`;
+
+
 // theme = responsiveFontSizes(theme);
 
 // creating history
@@ -52,6 +61,11 @@ const history = createHistory();
 
 function App() {
   const [page, setPage] = useState('/');
+  const [open, setOpen] = useState(false);
+
+  const handleDropDown = () => {
+    setOpen(prevState => !prevState);
+  }
 
   const handleSetPage = (event: React.SyntheticEvent) => {
     let target = event.currentTarget as HTMLInputElement;
@@ -61,13 +75,16 @@ function App() {
   return (
     <div className="App">
       <Router history={history}>
-        <Navbar />
+        <Navbar open={open} handleDropDown={handleDropDown} />
         <ThemeProvider theme={theme}>
           <Box display="flex">
             <Hidden mdDown>
               <Sidebar page={page} setPage={handleSetPage}/>
             </Hidden>
-            <Box minHeight="90vh">
+            <BodyContainer>
+              <AnimatePresence exitBeforeEnter initial={false}>
+                {open && (<Hidden lgUp><Dropdown /></Hidden>)}
+              </AnimatePresence>
               <AnimatePresence exitBeforeEnter initial={true}> 
                 <Switch>
                   <Route exact path="/" component={Homepage}/>
@@ -75,7 +92,7 @@ function App() {
                   <Route exact path="/projects" component={Projects}/>
                 </Switch>
               </AnimatePresence>
-            </Box>
+            </BodyContainer>
           </Box>
         </ThemeProvider>
       </Router>
