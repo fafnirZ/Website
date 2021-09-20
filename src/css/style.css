@@ -1,0 +1,16 @@
+body {
+  margin: 0;
+  /* overflow-x: hidden; */
+}
+
+:root {
+  --background-color: #25262A;
+  --background-light: #494A4E;
+  --card-default: #2F3034;
+  --primary: #60C697;
+  --secondary: #ffffff;
+}
+
+.App {
+  background: var(--background-color);
+}
