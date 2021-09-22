@@ -14,14 +14,5 @@ body {
 
 .App {
   background: var(--background-color);
-  height: 100%;
-}
 
-#root {
-  height: 100%;
-}
-
-
-html {
-  height: 100%;
 }

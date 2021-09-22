@@ -18,6 +18,7 @@ import Projects from './pages/Projects';
 import Sidebar from './components/Sidebar';
 import Navbar from './components/Navbar';
 import Dropdown from './components/Dropdown';
+import Menu from './components/Menu';
 
 
 // theme declaration
@@ -82,9 +83,10 @@ function App() {
               <Sidebar page={page} setPage={handleSetPage}/>
             </Hidden>
             <BodyContainer>
-              <AnimatePresence exitBeforeEnter initial={false}>
-                {open && (<Hidden lgUp><Dropdown /></Hidden>)}
-              </AnimatePresence>
+              
+                {/*open && (<Hidden lgUp><Dropdown /></Hidden>)*/}
+                {open && (<Hidden lgUp><Menu /></Hidden>)}
+
               <AnimatePresence exitBeforeEnter initial={true}> 
                 <Switch>
                   <Route exact path="/" component={Homepage}/>
