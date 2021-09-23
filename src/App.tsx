@@ -2,11 +2,11 @@
 import React, { useState } from 'react';
 import { Router, Switch, Route } from 'react-router-dom';
 import { createBrowserHistory as createHistory } from 'history';
-import { Box, ThemeProvider, createTheme, Hidden, responsiveFontSizes } from '@material-ui/core';
+import { Box, ThemeProvider, createTheme, Hidden } from '@material-ui/core';
 import { AnimatePresence } from 'framer-motion';
 import styled from 'styled-components';
 
-//global stylesheet
+// global stylesheet
 import './css/style.css';
 
 // page imports
@@ -17,43 +17,41 @@ import Projects from './pages/Projects';
 // component imports
 import Sidebar from './components/Sidebar';
 import Navbar from './components/Navbar';
-import Dropdown from './components/Dropdown';
+// import Dropdown from './components/Dropdown';
 import Menu from './components/Menu';
 
-
 // theme declaration
-let theme = createTheme({
+const theme = createTheme({
   palette: {
     // for buttons
     primary: {
-      main: "#60C697"
+      main: '#60C697',
     },
     secondary: {
-      main: "#FFFFFF"
-    } 
-  }, 
+      main: '#FFFFFF',
+    },
+  },
 });
 
 theme.typography.h5 = {
   ...theme.typography.h5,
   [theme.breakpoints.down('sm')]: {
-    fontSize: '1rem'
-  }
-}
+    fontSize: '1rem',
+  },
+};
 
 theme.typography.body1 = {
   ...theme.typography.body1,
   [theme.breakpoints.down('sm')]: {
-    fontSize: '0.8rem'
-  }
-}
+    fontSize: '0.8rem',
+  },
+};
 
 const BodyContainer = styled.div`
   min-height: 90vh;
   height: 100%;
   /* overflow-x: hidden; */
 `;
-
 
 // theme = responsiveFontSizes(theme);
 
@@ -65,13 +63,13 @@ function App() {
   const [open, setOpen] = useState(false);
 
   const handleDropDown = () => {
-    setOpen(prevState => !prevState);
-  }
+    setOpen((prevState) => !prevState);
+  };
 
   const handleSetPage = (event: React.SyntheticEvent) => {
-    let target = event.currentTarget as HTMLInputElement;
+    const target = event.currentTarget as HTMLInputElement;
     setPage(target.id);
-  }
+  };
 
   return (
     <div className="App">
@@ -80,18 +78,21 @@ function App() {
         <ThemeProvider theme={theme}>
           <Box display="flex">
             <Hidden mdDown>
-              <Sidebar page={page} setPage={handleSetPage}/>
+              <Sidebar page={page} setPage={handleSetPage} />
             </Hidden>
             <BodyContainer>
-              
-                {/*open && (<Hidden lgUp><Dropdown /></Hidden>)*/}
-                {open && (<Hidden lgUp><Menu /></Hidden>)}
+              {/* open && (<Hidden lgUp><Dropdown /></Hidden>)*/}
+              {open && (
+                <Hidden lgUp>
+                  <Menu />
+                </Hidden>
+              )}
 
-              <AnimatePresence exitBeforeEnter initial={true}> 
+              <AnimatePresence exitBeforeEnter initial={true}>
                 <Switch>
-                  <Route exact path="/" component={Homepage}/>
-                  <Route exact path="/about" component={About}/>
-                  <Route exact path="/projects" component={Projects}/>
+                  <Route exact path="/" component={Homepage} />
+                  <Route exact path="/about" component={About} />
+                  <Route exact path="/projects" component={Projects} />
                 </Switch>
               </AnimatePresence>
             </BodyContainer>

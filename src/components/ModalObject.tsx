@@ -1,11 +1,11 @@
-import React, { ReactElement, useState, useEffect } from 'react';
+import React, { ReactElement } from 'react';
 import { Modal } from '@material-ui/core';
 import styled from 'styled-components';
 
 interface Props {
-  open : boolean
-  handleClose : () => void;
-  children: React.ReactChild
+  open: boolean;
+  handleClose: () => void;
+  children: React.ReactChild;
 }
 
 const Container = styled.div`
@@ -19,17 +19,16 @@ const Container = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-
 `;
 
-
-
-const ModalObject: React.FC<Props> = ({ open, handleClose, children }): ReactElement => {
+const ModalObject: React.FC<Props> = ({
+  open,
+  handleClose,
+  children,
+}): ReactElement => {
   return (
     <Modal open={open} onClose={handleClose}>
-      <Container>
-        {children}
-      </Container>
+      <Container>{children}</Container>
     </Modal>
   );
 };

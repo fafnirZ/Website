@@ -1,12 +1,12 @@
-import React, { ReactElement, useState, useEffect } from 'react';
+import React, { ReactElement } from 'react';
 import styled, { css } from 'styled-components';
 
 interface Props {
-  open : boolean
+  open: boolean;
 }
 
-interface StyledProps{
-  open: boolean
+interface StyledProps {
+  open: boolean;
 }
 
 const Container = styled.div<StyledProps>`
@@ -21,34 +21,37 @@ const Container = styled.div<StyledProps>`
     fill: var(--primary);
   }
 
-  ${props=> props.open && css`
-    rect:nth-child(3) {
-      opacity: 0;
-      transition: opacity 0.5s;
-    }
-    rect:nth-child(1) {
-      transform: translate(15%, -5%) rotate(45deg);
-      transition: transform 0.5s;
-    }
-    rect:nth-child(2) {
-      transform: translate(-15%,65%) rotate(-45deg);
-      transition: transform 0.5s;
-    }
-  `}
+  ${(props) =>
+    props.open &&
+    css`
+      rect:nth-child(3) {
+        opacity: 0;
+        transition: opacity 0.5s;
+      }
+      rect:nth-child(1) {
+        transform: translate(15%, -5%) rotate(45deg);
+        transition: transform 0.5s;
+      }
+      rect:nth-child(2) {
+        transform: translate(-15%, 65%) rotate(-45deg);
+        transition: transform 0.5s;
+      }
+    `}
 
-  ${props=> !props.open && css`
-    rect:nth-child(3) {
-      opacity: 1;
-      transition: opacity 0.5s;
-    }
-    rect:nth-child(1) {
-      transition: transform 0.5s;
-    }
-    rect:nth-child(2) {
-      transition: transform 0.5s;
-    }
-  `}
-
+  ${(props) =>
+    !props.open &&
+    css`
+      rect:nth-child(3) {
+        opacity: 1;
+        transition: opacity 0.5s;
+      }
+      rect:nth-child(1) {
+        transition: transform 0.5s;
+      }
+      rect:nth-child(2) {
+        transition: transform 0.5s;
+      }
+    `}
 `;
 
 const Hamburger: React.FC<Props> = ({ open }): ReactElement => {

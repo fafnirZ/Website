@@ -1,4 +1,4 @@
-import React, { ReactElement, useState, useEffect } from 'react';
+import React, { ReactElement } from 'react';
 import { useTheme } from '@material-ui/core/styles';
 import { Box, Grid, Typography, Card, useMediaQuery } from '@material-ui/core';
 import CodeIcon from '@material-ui/icons/Code';
@@ -7,14 +7,21 @@ import { motion } from 'framer-motion';
 
 const Information = [
   {
-    title: "My Journey",
-    body: "I started off my journey down this path as a programmer long before I even knew I was going to end up here, in year 7 when I was tinkering with minecraft plugins, trying to become a developer in some RPG server. Fast forward 6-7 years, and here I am still fascinated with code."
+    title: 'My Journey',
+    body: `I started off my journey down this path as a programmer long 
+    before I even knew I was going to end up here, in year 7 when I was 
+    tinkering with minecraft plugins, trying to become a developer in 
+    some RPG server. Fast forward 6-7 years, and here I am still 
+    fascinated with code.`,
   },
   {
-    title: "Skills and Experience",
-    body: "Experienced in full stack web development, primarily ReactJs (Typescript) and NodeJs/Golang backend development. Experienced in using Docker as well as Github pages for deployment."
-  }
-]
+    title: 'Skills and Experience',
+    body: `Experienced in full stack web development, primarily 
+    ReactJs (Typescript) and NodeJs/Golang backend development.
+    Experienced in using Docker as well as Github pages for
+    deployment.`,
+  },
+];
 
 const Cards = [
   {
@@ -32,8 +39,8 @@ const Cards = [
   {
     heading: 'Scripting',
     content: 'Bash, Perl',
-  }
-]
+  },
+];
 
 const CardContainer = styled(Card)`
   height: 100px;
@@ -42,20 +49,21 @@ const CardContainer = styled(Card)`
   padding: 5px;
 `;
 
-
 const About: React.FC = ({}): ReactElement => {
   const theme = useTheme();
   const mdDown = useMediaQuery(theme.breakpoints.down('md'));
 
   // get global css variable for color
-  const cardColor = getComputedStyle(document.documentElement).getPropertyValue('--card-default')
+  const cardColor = getComputedStyle(document.documentElement).getPropertyValue(
+    '--card-default'
+  );
 
   return (
-    <Box margin={mdDown ? "50px" : "150px"}>
+    <Box margin={mdDown ? '50px' : '150px'}>
       <Grid container justifyContent="space-between" spacing={5}>
         <Grid item xs={12} md={5}>
           <Box display="flex" flexDirection="column" gridGap="10px">
-            {Information.map((obj)=> {
+            {Information.map((obj) => {
               return (
                 <>
                   <Typography variant="h5" color="primary">
@@ -65,7 +73,7 @@ const About: React.FC = ({}): ReactElement => {
                     {obj.body}
                   </Typography>
                 </>
-              )
+              );
             })}
           </Box>
         </Grid>
@@ -79,12 +87,13 @@ const About: React.FC = ({}): ReactElement => {
             {Cards.map((card, index) => {
               return (
                 <motion.div
-                initial = {{ y : -1*(index)*100 , opacity: 0 }}
-                animate = {{ y : 0, opacity: 1 }}
-                transition = {{ 
-                  duration: 0.3 * index ,
-                  type: 'spring',
-                }}
+                  initial={{ y: -1 * index * 100, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{
+                    duration: 0.3 * index,
+                    type: 'spring',
+                  }}
+                  key=""
                 >
                   <CardContainer
                     style={{
@@ -96,12 +105,12 @@ const About: React.FC = ({}): ReactElement => {
                       {card.heading}
                     </Typography>
                     <Typography variant="body1" color="secondary">
-                      {card.content} 
+                      {card.content}
                     </Typography>
                     <CodeIcon color="secondary" />
                   </CardContainer>
                 </motion.div>
-              )
+              );
             })}
           </Box>
         </Grid>

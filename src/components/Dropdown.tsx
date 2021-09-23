@@ -1,14 +1,12 @@
-import React, { ReactElement, useState, useEffect } from 'react';
+import React, { ReactElement } from 'react';
 import { NavLink } from 'react-router-dom';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { Box, Typography } from '@material-ui/core';
 import { motion } from 'framer-motion';
 
 import Links from 'src/Data/Links';
 
-interface Props {
-
-}
+interface Props {}
 
 const Container = styled.div`
   width: 100px;
@@ -20,23 +18,19 @@ const Container = styled.div`
   text-align: center;
   margin-left: auto;
 
-
   position: absolute;
   right: 10px;
-  
 
   & > div {
     position: sticky;
     top: 10vh;
     z-index: 999;
   }
-
-`
+`;
 
 interface StyledProps {
-  index: number
+  index: number;
 }
-
 
 const SectionContainer = styled.div<StyledProps>`
   background: var(--card-light);
@@ -52,17 +46,17 @@ const Dropdown: React.FC<Props> = ({}): ReactElement => {
         {Links.map((item, index) => {
           return (
             <motion.div
-              initial={{ y: -1*index*30 }}
+              initial={{ y: -1 * index * 30 }}
               animate={{ y: 0 }}
               transition={{ duration: 0.3, type: 'spring' }}
-              exit={{ y: -1*index*30, opacity: 0 }}
+              exit={{ y: -1 * index * 30, opacity: 0 }}
               whileHover={{ scale: 1.2 }}
             >
               <SectionContainer index={index}>
                 <NavLink
                   to={item.link}
                   style={{
-                    textDecoration: 'none'
+                    textDecoration: 'none',
                   }}
                 >
                   <Typography variant="subtitle1" color="secondary">
@@ -71,7 +65,7 @@ const Dropdown: React.FC<Props> = ({}): ReactElement => {
                 </NavLink>
               </SectionContainer>
             </motion.div>
-          )
+          );
         })}
       </Box>
     </Container>

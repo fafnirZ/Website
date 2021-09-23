@@ -4,15 +4,14 @@ body {
 }
 
 :root {
-  --background-color: #25262A;
-  --background-light: #494A4E;
-  --card-default: #2F3034;
+  --background-color: #25262a;
+  --background-light: #494a4e;
+  --card-default: #2f3034;
   --card-light: #404247;
-  --primary: #60C697;
+  --primary: #60c697;
   --secondary: #ffffff;
 }
 
 .App {
   background: var(--background-color);
-
 }

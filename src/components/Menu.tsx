@@ -1,12 +1,7 @@
 import React, { ReactElement } from 'react';
-import styled from "styled-components";
-import { Box } from "@material-ui/core";
+import styled from 'styled-components';
 
-interface MenuProps {
-
-}
-
-
+interface MenuProps {}
 
 const Container = styled.div`
   position: absolute;
@@ -17,13 +12,8 @@ const Container = styled.div`
   overflow: hidden;
 `;
 
-
 const Menu = ({}: MenuProps): ReactElement => {
-  return (
-    <Container >
-      helloasdas
-    </Container>
-  );
+  return <Container>helloasdas</Container>;
 };
 
 export default Menu;
