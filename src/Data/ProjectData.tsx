@@ -1,39 +1,56 @@
 import unswsecurity from 'src/assets/unswsecurity.png';
+import csesocorg from 'src/assets/csesocorg.webp';
+import schabu from 'src/assets/schabu.png';
+import scones from 'src/assets/scones.png';
 
 export const ProjectData = [
   {
-    image: "",
+    image: csesocorg,
     title: "csesoc.org",
-    tags: ["frontend"]
+    tags: ["frontend"],
+    github: "https://github.com/csesoc/csesoc.unsw.edu.au",
+    link: ""
   }, 
   {
-    image: "",
-    title: "cms.csesoc.org",
-    tags: ["frontend", "backend"]
-  }, 
-  {
-    image: "",
+    image: scones,
     title: "scones.unswsecurity.com",
-    tags: ["frontend"]
+    tags: ["frontend"],
+    github: "",
+    link: ""
   },
   {
     image: unswsecurity,
     title: "unswsecurity.com",
-    tags: ["frontend", "backend"]
+    tags: ["frontend", "backend"],
+    github: "",
+    link: "https://unswsecurity.com"
   },
   {
-    image: "",
+    image: schabu,
     title: "schabu.com",
-    tags: ["frontend"]
+    tags: ["frontend"],
+    github: "",
+    link: "https://schabu.com"
+  }, 
+  {
+    image: "",
+    title: "cms.csesoc.org",
+    tags: ["frontend", "backend"],
+    github: "https://github.com/csesoc/cms.csesoc.unsw.edu.au",
+    link: ""
   }, 
   {
     image: "",
     title: "nuibot",
-    tags: ["backend", "other"]
+    tags: ["backend", "other"],
+    github: "",
+    link: ""
   },
   {
     image: "",
     title: "Draft.js prototype",
-    tags: ["frontend"]
+    tags: ["frontend"],
+    github: "",
+    link: ""
   }
 ]

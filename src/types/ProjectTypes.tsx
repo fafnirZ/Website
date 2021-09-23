@@ -1,5 +1,7 @@
 export interface ProjectType{
   image: string,
   title: string,
-  tags: string[]
+  tags: string[],
+  github: string,
+  link: string
 }

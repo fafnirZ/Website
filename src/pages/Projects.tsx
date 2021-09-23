@@ -71,7 +71,7 @@ const Projects: React.FC<Props> = ({}): ReactElement => {
     setOpen(true);
     const curr = e.currentTarget.id as string;
     setCurrent(curr);
-    console.log(curr)
+    // console.log(curr)
   }
 
   const handleClose = () => {
