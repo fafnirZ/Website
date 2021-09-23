@@ -1,7 +1,7 @@
 // import dependencies
 import React, { useState } from 'react';
-import { Router, Switch, Route } from 'react-router-dom';
-import { createBrowserHistory as createHistory } from 'history';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
 import { Box, ThemeProvider, createTheme, Hidden } from '@material-ui/core';
 import { AnimatePresence } from 'framer-motion';
 import styled from 'styled-components';
@@ -17,8 +17,8 @@ import Projects from './pages/Projects';
 // component imports
 import Sidebar from './components/Sidebar';
 import Navbar from './components/Navbar';
-// import Dropdown from './components/Dropdown';
-import Menu from './components/Menu';
+import Dropdown from './components/Dropdown';
+// import Menu from './components/Menu';
 
 // theme declaration
 const theme = createTheme({
@@ -55,8 +55,6 @@ const BodyContainer = styled.div`
 
 // theme = responsiveFontSizes(theme);
 
-// creating history
-const history = createHistory();
 
 function App() {
   const [page, setPage] = useState('/');
@@ -73,7 +71,7 @@ function App() {
 
   return (
     <div className="App">
-      <Router history={history}>
+      <Router>
         <Navbar open={open} handleDropDown={handleDropDown} />
         <ThemeProvider theme={theme}>
           <Box display="flex">
@@ -81,13 +79,7 @@ function App() {
               <Sidebar page={page} setPage={handleSetPage} />
             </Hidden>
             <BodyContainer>
-              {/* open && (<Hidden lgUp><Dropdown /></Hidden>)*/}
-              {open && (
-                <Hidden lgUp>
-                  <Menu />
-                </Hidden>
-              )}
-
+              {open && (<Hidden lgUp><Dropdown /></Hidden>)}
               <AnimatePresence exitBeforeEnter initial={true}>
                 <Switch>
                   <Route exact path="/" component={Homepage} />

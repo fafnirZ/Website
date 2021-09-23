@@ -10,8 +10,11 @@ import {
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
+
 // own imports
 import ModalObject from 'src/components/ModalObject';
+import { ProjectData } from 'src/Data/ProjectData';
+// import { ProjectType } from 'src/types/ProjectTypes';
 
 interface Props {}
 
@@ -41,11 +44,17 @@ const ButtonContainer = styled.button<ButtonStyledProps>`
 const CardContainer = styled(Card)`
   width: min(70vw, 300px);
   height: 250px;
+
+  & > img {
+    object-fit: cover;
+    object-position: center;
+    height: 100%;
+  }
 `;
 
-const tempdata = [{}, {}, {}, {}, {}, {}];
 
 const buttons = [{ name: 'Frontend' }, { name: 'Backend' }, { name: 'Other' }];
+
 
 const Projects: React.FC<Props> = ({}): ReactElement => {
   const cardColor = getComputedStyle(document.documentElement).getPropertyValue(
@@ -56,6 +65,14 @@ const Projects: React.FC<Props> = ({}): ReactElement => {
   const smDown = useMediaQuery(theme.breakpoints.down('sm'));
 
   const [open, setOpen] = useState(false);
+  const [current, setCurrent] = useState('' as string);
+
+  const handleOpen = (e: React.SyntheticEvent) => {
+    setOpen(true);
+    const curr = e.currentTarget.id as string;
+    setCurrent(curr);
+    console.log(curr)
+  }
 
   const handleClose = () => {
     setOpen(false);
@@ -93,7 +110,7 @@ const Projects: React.FC<Props> = ({}): ReactElement => {
       </Box>
       <Box>
         <Grid container spacing={3}>
-          {tempdata.map((obj, index) => {
+          {ProjectData.map((obj, index) => {
             return (
               <Grid item xs={12} md={4}>
                 <motion.div
@@ -115,19 +132,18 @@ const Projects: React.FC<Props> = ({}): ReactElement => {
                       background: cardColor,
                     }}
                     elevation={5}
-                    onClick={() => {
-                      setOpen(true);
-                    }}
-                  ></CardContainer>
+                    onClick={handleOpen}
+                    id={obj.title}
+                  >
+                    <img src={obj.image} alt="" />
+                  </CardContainer>
                 </motion.div>
               </Grid>
             );
           })}
         </Grid>
       </Box>
-      <ModalObject open={open} handleClose={handleClose}>
-        hi
-      </ModalObject>
+      {open && <ModalObject open={open} handleClose={handleClose} data={current} />}
     </Box>
   );
 };
