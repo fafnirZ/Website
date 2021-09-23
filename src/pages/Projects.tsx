@@ -7,9 +7,8 @@ import {
   useMediaQuery,
   useTheme,
 } from '@material-ui/core';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import styled from 'styled-components';
-
 
 // own imports
 import ModalObject from 'src/components/ModalObject';
@@ -52,9 +51,7 @@ const CardContainer = styled(Card)`
   }
 `;
 
-
 const buttons = [{ name: 'Frontend' }, { name: 'Backend' }, { name: 'Other' }];
-
 
 const Projects: React.FC<Props> = ({}): ReactElement => {
   const cardColor = getComputedStyle(document.documentElement).getPropertyValue(
@@ -66,16 +63,22 @@ const Projects: React.FC<Props> = ({}): ReactElement => {
 
   const [open, setOpen] = useState(false);
   const [current, setCurrent] = useState('' as string);
+  const [filter, setFilter] = useState('' as string);
 
   const handleOpen = (e: React.SyntheticEvent) => {
     setOpen(true);
     const curr = e.currentTarget.id as string;
     setCurrent(curr);
     // console.log(curr)
-  }
+  };
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleSetFilter = (e: React.SyntheticEvent) => {
+    const currFilter = e.currentTarget.id.toLowerCase() as string;
+    setFilter(currFilter);
   };
 
   return (
@@ -101,7 +104,11 @@ const Projects: React.FC<Props> = ({}): ReactElement => {
                 type: 'spring',
               }}
             >
-              <ButtonContainer smDown={smDown}>
+              <ButtonContainer
+                smDown={smDown}
+                onClick={handleSetFilter}
+                id={button.name}
+              >
                 <Typography color="secondary">{button.name}</Typography>
               </ButtonContainer>
             </motion.div>
@@ -111,39 +118,45 @@ const Projects: React.FC<Props> = ({}): ReactElement => {
       <Box>
         <Grid container spacing={3}>
           {ProjectData.map((obj, index) => {
-            return (
-              <Grid item xs={12} md={4}>
-                <motion.div
-                  initial={{
-                    x: -1 * (index % 3) * 300,
-                    y: -1 * Math.floor(index / 3) * 250,
-                  }}
-                  animate={{
-                    x: 0,
-                    y: 0,
-                  }}
-                  transition={{
-                    duration: 0.5,
-                    type: 'spring',
-                  }}
-                >
-                  <CardContainer
-                    style={{
-                      background: cardColor,
+            if (obj.tags.includes(filter) || filter === '') {
+              return (
+                <Grid item xs={12} md={4}>
+                  <motion.div
+                    initial={{
+                      x: -1 * (index % 3) * 300,
+                      y: -1 * Math.floor(index / 3) * 250,
                     }}
-                    elevation={5}
-                    onClick={handleOpen}
-                    id={obj.title}
+                    animate={{
+                      x: 0,
+                      y: 0,
+                    }}
+                    transition={{
+                      duration: 0.5,
+                      type: 'spring',
+                    }}
                   >
-                    <img src={obj.image} alt="" />
-                  </CardContainer>
-                </motion.div>
-              </Grid>
-            );
+                    <CardContainer
+                      style={{
+                        background: cardColor,
+                      }}
+                      elevation={5}
+                      onClick={handleOpen}
+                      id={obj.title}
+                    >
+                      <img src={obj.image} alt="" />
+                    </CardContainer>
+                  </motion.div>
+                </Grid>
+              );
+            }
           })}
         </Grid>
       </Box>
-      {open && <ModalObject open={open} handleClose={handleClose} data={current} />}
+      <AnimatePresence exitBeforeEnter>
+        {open && (
+          <ModalObject open={open} handleClose={handleClose} data={current} />
+        )}
+      </AnimatePresence>
     </Box>
   );
 };

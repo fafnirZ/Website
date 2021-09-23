@@ -55,7 +55,6 @@ const BodyContainer = styled.div`
 
 // theme = responsiveFontSizes(theme);
 
-
 function App() {
   const [page, setPage] = useState('/');
   const [open, setOpen] = useState(false);
@@ -79,7 +78,11 @@ function App() {
               <Sidebar page={page} setPage={handleSetPage} />
             </Hidden>
             <BodyContainer>
-              {open && (<Hidden lgUp><Dropdown /></Hidden>)}
+              {open && (
+                <Hidden lgUp>
+                  <Dropdown />
+                </Hidden>
+              )}
               <AnimatePresence exitBeforeEnter initial={true}>
                 <Switch>
                   <Route exact path="/" component={Homepage} />
